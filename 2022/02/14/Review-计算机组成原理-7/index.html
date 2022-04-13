@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Review-计算机组成原理-7 - Hexo</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hexo"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hexo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="CPU的结构和功能7.1 CPU的结构7.1.1 CPU的功能CPU 由运算器和控制器组成 控制器负责控制执行程序的指令序列，运算器负责数据加工，具体功能包括：  指令控制：完成取指令、分析指令和执行指令的操作，即顺序控制 操作控制：产生完成每条指令所需的控制命令 时间控制：给每条指令按时间顺序提供应有控制信号 数据加工：对数据进行算数和逻辑运算 中断处理：处理异常情况和特殊请求  7.1.3 C"><meta property="og:type" content="blog"><meta property="og:title" content="Review-计算机组成原理-7"><meta property="og:url" content="http://example.com/2022/02/14/Review-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-7/"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="CPU的结构和功能7.1 CPU的结构7.1.1 CPU的功能CPU 由运算器和控制器组成 控制器负责控制执行程序的指令序列，运算器负责数据加工，具体功能包括：  指令控制：完成取指令、分析指令和执行指令的操作，即顺序控制 操作控制：产生完成每条指令所需的控制命令 时间控制：给每条指令按时间顺序提供应有控制信号 数据加工：对数据进行算数和逻辑运算 中断处理：处理异常情况和特殊请求  7.1.3 C"><meta property="og:locale" content="en_US"><meta property="og:image" content="c:/Users/Moonl/AppData/Roaming/Typora/typora-user-images/image-20220214101416989.png"><meta property="og:image" content="c:/Users/Moonl/AppData/Roaming/Typora/typora-user-images/image-20220214104146091.png"><meta property="og:image" content="c:/Users/Moonl/AppData/Roaming/Typora/typora-user-images/image-20220214104120606.png"><meta property="og:image" content="c:/Users/Moonl/AppData/Roaming/Typora/typora-user-images/image-20220214105513507.png"><meta property="article:published_time" content="2022-02-14T01:21:56.000Z"><meta property="article:modified_time" content="2022-02-14T04:39:40.123Z"><meta property="article:author" content="John Doe"><meta property="article:tag" content="计算机基础"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="C:\Users\Moonl\AppData\Roaming\Typora\typora-user-images\image-20220214101416989.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2022/02/14/Review-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-7/"},"headline":"Review-计算机组成原理-7","image":["c:/Users/Moonl/AppData/Roaming/Typora/typora-user-images/image-20220214101416989.png","c:/Users/Moonl/AppData/Roaming/Typora/typora-user-images/image-20220214104146091.png","c:/Users/Moonl/AppData/Roaming/Typora/typora-user-images/image-20220214104120606.png","c:/Users/Moonl/AppData/Roaming/Typora/typora-user-images/image-20220214105513507.png"],"datePublished":"2022-02-14T01:21:56.000Z","dateModified":"2022-02-14T04:39:40.123Z","author":{"@type":"Person","name":"John Doe"},"publisher":{"@type":"Organization","name":"Hexo","logo":{"@type":"ImageObject","url":"http://example.com/img/logo.svg"}},"description":"CPU的结构和功能7.1 CPU的结构7.1.1 CPU的功能CPU 由运算器和控制器组成 控制器负责控制执行程序的指令序列，运算器负责数据加工，具体功能包括：  指令控制：完成取指令、分析指令和执行指令的操作，即顺序控制 操作控制：产生完成每条指令所需的控制命令 时间控制：给每条指令按时间顺序提供应有控制信号 数据加工：对数据进行算数和逻辑运算 中断处理：处理异常情况和特殊请求  7.1.3 C"}</script><link rel="canonical" href="http://example.com/2022/02/14/Review-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-7/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+          Array
+              .from(document.querySelectorAll('.tab-content'))
+              .forEach($tab => {
+                  $tab.classList.add('is-hidden');
+              });
+          Array
+              .from(document.querySelectorAll('.tabs li'))
+              .forEach($tab => {
+                  $tab.classList.remove('is-active');
+              });
+          const $activeTab = document.querySelector(location.hash);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+          const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hexo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-02-14T01:21:56.000Z" title="2022/2/14 09:21:56">2022-02-14</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-02-14T04:39:40.123Z" title="2022/2/14 12:39:40">2022-02-14</time></span><span class="level-item">9 minutes read (About 1343 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">Review-计算机组成原理-7</h1><div class="content"><h2 id="CPU的结构和功能"><a href="#CPU的结构和功能" class="headerlink" title="CPU的结构和功能"></a>CPU的结构和功能</h2><h3 id="7-1-CPU的结构"><a href="#7-1-CPU的结构" class="headerlink" title="7.1 CPU的结构"></a>7.1 CPU的结构</h3><h4 id="7-1-1-CPU的功能"><a href="#7-1-1-CPU的功能" class="headerlink" title="7.1.1 CPU的功能"></a>7.1.1 CPU的功能</h4><p>CPU 由<strong>运算器</strong>和<strong>控制器</strong>组成</p>
+<p>控制器负责控制执行程序的指令序列，运算器负责数据加工，具体功能包括：</p>
+<ul>
+<li>指令控制：完成取指令、分析指令和执行指令的操作，即顺序控制</li>
+<li>操作控制：产生完成每条指令所需的控制命令</li>
+<li>时间控制：给每条指令按时间顺序提供应有控制信号</li>
+<li>数据加工：对数据进行算数和逻辑运算</li>
+<li>中断处理：处理异常情况和特殊请求</li>
+</ul>
+<h4 id="7-1-3-CPU的寄存器"><a href="#7-1-3-CPU的寄存器" class="headerlink" title="7.1.3 CPU的寄存器"></a>7.1.3 CPU的寄存器</h4><ol>
+<li>用户可见寄存器<ul>
+<li>通用寄存器：可存放操作数，也可作为满足某寻址方式所需的寄存器（如基址寄存器）</li>
+<li>数据寄存器：存放操作数，其位数能满足大多数数据类型的数值范围</li>
+<li>地址寄存器：可存放地址，也具有通用性，位数必须足够长以最大满足寻址范围</li>
+<li>条件码寄存器：根据运算结果由硬件设置（如正负零或溢出）</li>
+</ul>
+</li>
+<li>控制和状态寄存器：<ul>
+<li>MAR &#x2F; MDR &#x2F; PC &#x2F; IR &#x2F; 程序状态字 PSW &#x2F; 中断标记寄存器</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="7-2-指令周期"><a href="#7-2-指令周期" class="headerlink" title="7.2 指令周期"></a>7.2 指令周期</h3><h4 id="7-2-1-指令周期的基本概念"><a href="#7-2-1-指令周期的基本概念" class="headerlink" title="7.2.1 指令周期的基本概念"></a>7.2.1 指令周期的基本概念</h4><p>CPU 取出并执行一条指令所需的全部时间称为指令周期</p>
+<img src="C:\Users\Moonl\AppData\Roaming\Typora\typora-user-images\image-20220214101416989.png" align="left" alt="image-20220214101416989" style="zoom:50%;" />
+
+<h4 id="7-2-2-指令周期的数据流"><a href="#7-2-2-指令周期的数据流" class="headerlink" title="7.2.2 指令周期的数据流"></a>7.2.2 指令周期的数据流</h4><ol>
+<li><p>取指周期：根据 PC 地址从主存中取出指令代码并放入 IR</p>
+<ol>
+<li>PC → MAR → 地址总线 → 存储器</li>
+<li>CU读命令 → 控制总线 → 主存 </li>
+<li>存储器 → 数据总线 → MDR → IR</li>
+<li>CU → (PC)+1 → PC</li>
+</ol>
+<img src="C:\Users\Moonl\AppData\Roaming\Typora\typora-user-images\image-20220214104146091.png" align="left" alt="image-20220214104146091" style="zoom:50%;" />
+</li>
+<li><p>间址周期：取操作数有效地址</p>
+<ol>
+<li>Ad(IR) 或 MDR → MAR → 地址总线 → 存储器</li>
+<li>CU读命令 → 控制总线 →存储器</li>
+<li>存储器 → 数据总线 → MDR</li>
+</ol>
+<img src="C:\Users\Moonl\AppData\Roaming\Typora\typora-user-images\image-20220214104120606.png" alt="image-20220214104120606" style="zoom:50%;" />
+</li>
+<li><p>执行周期：不同指令执行周期操作不同，没有统一的数据流</p>
+</li>
+<li><p>中断周期：处理中断请求</p>
+<ol>
+<li>CU → MAR → 地址总线 → 存储器 </li>
+<li>CU写命令 → 控制总线 → 存储器</li>
+<li>PC → MDR → 数据总线 → 存储器 （保存断点）</li>
+<li>CU → PC （形成入口地址）</li>
+</ol>
+</li>
+</ol>
+<h3 id="7-3-指令流水"><a href="#7-3-指令流水" class="headerlink" title="7.3 指令流水"></a>7.3 指令流水</h3><h4 id="7-3-1-指令流水原理"><a href="#7-3-1-指令流水原理" class="headerlink" title="7.3.1 指令流水原理"></a>7.3.1 指令流水原理</h4><p>取下一条指令的操作和执行当前指令的操作同时进行，实现指令的二级流水</p>
+<img src="C:\Users\Moonl\AppData\Roaming\Typora\typora-user-images\image-20220214105513507.png" align="left" alt="image-20220214105513507" style="zoom:50%;" />
+
+<h4 id="7-3-2-影响流水线性能的因素"><a href="#7-3-2-影响流水线性能的因素" class="headerlink" title="7.3.2 影响流水线性能的因素"></a>7.3.2 影响流水线性能的因素</h4><ol>
+<li>影响执行效率加倍的因素<ul>
+<li>执行时间一般大于取指时间，需设立缓冲区</li>
+<li>遇到条件转移指令时，下一条指令是未知的，采用猜测法</li>
+</ul>
+</li>
+<li>影响执行效率提高的因素<ul>
+<li>结构上，不同指令争用同一功能部件而产生资源冲突<ul>
+<li>操作数和指令分开存储，避免取指和取操作数冲突</li>
+</ul>
+</li>
+<li>数据上，各指令的重叠访存可能改变操作数的读写访问顺序<ul>
+<li>后退法：将相关指令延迟到操作数被写回寄存器后再执行</li>
+<li>定向技术：计算结果不待写入寄存器直接送往所需部件</li>
+</ul>
+</li>
+<li>控制上，转移指令会破坏流水线的连续性，损失大量性能</li>
+</ul>
+</li>
+</ol>
+<h4 id="7-3-3-流水线性能"><a href="#7-3-3-流水线性能" class="headerlink" title="7.3.3 流水线性能"></a>7.3.3 流水线性能</h4><ul>
+<li>吞吐率：单位时间内流水线完成的指令数量</li>
+<li>加速比：流水线速度与等功能非流水线的速度之比，最大加速比等于流水线段数</li>
+<li>效率：流水线各功能段的利用率，常用工作时间时空区与总时空区之比来衡量</li>
+</ul>
+<h4 id="7-3-4-流水线多发技术"><a href="#7-3-4-流水线多发技术" class="headerlink" title="7.3.4 流水线多发技术"></a>7.3.4 流水线多发技术</h4><ul>
+<li>超标量技术：同时并发多条独立指令</li>
+<li>超流水线技术：将时钟周期再分段</li>
+<li>超长指令字技术：将多条能并行操作的指令组合</li>
+</ul>
+<hr>
+<h3 id="7-4-中断系统"><a href="#7-4-中断系统" class="headerlink" title="7.4 中断系统"></a>7.4 中断系统</h3><h4 id="7-4-2-中断请求标记和中断判优逻辑"><a href="#7-4-2-中断请求标记和中断判优逻辑" class="headerlink" title="7.4.2 中断请求标记和中断判优逻辑"></a>7.4.2 中断请求标记和中断判优逻辑</h4><ol>
+<li><p>中断请求标记：用于确定发出中断请求的中断源</p>
+</li>
+<li><p>中断判优逻辑：硬件排队或软件排队</p>
+</li>
+</ol>
+<h4 id="7-4-3-入口地址寻找"><a href="#7-4-3-入口地址寻找" class="headerlink" title="7.4.3 入口地址寻找"></a>7.4.3 入口地址寻找</h4><ul>
+<li>硬件向量：①存放无条件转移指令 ②设置向量地址表</li>
+<li>软件查询：查询到某中断源发出中断请求后安排转移指令，自动进入中断处理</li>
+</ul>
+<h4 id="7-4-4-中断响应"><a href="#7-4-4-中断响应" class="headerlink" title="7.4.4 中断响应"></a>7.4.4 中断响应</h4><ol>
+<li>响应条件：允许中断触发器 EINT，开中断置”1”，关中断置”0”</li>
+<li>响应时间：指令执行周期结束后，统一向所有中断源发中断查询信号</li>
+</ol>
+<h4 id="7-4-5-中断屏蔽技术"><a href="#7-4-5-中断屏蔽技术" class="headerlink" title="7.4.5 中断屏蔽技术"></a>7.4.5 中断屏蔽技术</h4><p>中断屏蔽技术主要用于多重中断</p>
+<ol>
+<li><p>多重中断：CPU 在执行中断服务程序过程中，出现了更高优先级的中断请求，                若CPU 暂停现行程序，转而处理新的中断请求，这种中断称为多重中断  </p>
+</li>
+<li><p>实现多重中断的条件：①提前“开中断” ②可抢夺</p>
+</li>
+<li><p>屏蔽技术：设置屏蔽触发器和屏蔽字，例：D &gt; A &gt; C &gt; B</p>
+<table>
+<thead>
+<tr>
+<th align="center">中断源&#x2F;屏蔽字</th>
+<th align="center">A</th>
+<th align="center">B</th>
+<th align="center">C</th>
+<th align="center">D</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">A</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">B</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">C</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">D</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+<p>响应优先级由硬件设定，处理优先级可以通过屏蔽技术而改变</p>
+</li>
+</ol>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Review-计算机组成原理-7</p><p><a href="http://example.com/2022/02/14/Review-计算机组成原理-7/">http://example.com/2022/02/14/Review-计算机组成原理-7/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>John Doe</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2022-02-14</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-02-14</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2022/02/21/Review-%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-1/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Review_编译原理_1</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/02/12/Review-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-6/"><span class="level-item">Review_计算机组成原理_6</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Your name"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Your name</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Your location</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">11</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tag</p><a href="/tags"><p class="title">1</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/ppoffice"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-02-21T01:20:21.000Z">2022-02-21</time></p><p class="title"><a href="/2022/02/21/Review-%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-4/">Review_编译原理_4</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-02-21T01:20:17.000Z">2022-02-21</time></p><p class="title"><a href="/2022/02/21/Review-%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-3/">Review_编译原理_3</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-02-21T01:20:13.000Z">2022-02-21</time></p><p class="title"><a href="/2022/02/21/Review-%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-2/">Review_编译原理_2</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-02-21T01:20:08.000Z">2022-02-21</time></p><p class="title"><a href="/2022/02/21/Review-%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-1/">Review_编译原理_1</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-02-14T01:21:56.000Z">2022-02-14</time></p><p class="title"><a href="/2022/02/14/Review-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-7/">Review-计算机组成原理-7</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">February 2022</span></span><span class="level-end"><span class="level-item tag">11</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"><span class="tag">计算机基础</span><span class="tag">7</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">Subscribe for updates</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="Subscribe"></div></div></form></div></div></div><div class="card widget"><div class="card-content"><div class="notification is-danger">You need to set <code>client_id</code> and <code>slot_id</code> to show this AD unit. Please set it in <code>_config.yml</code>.</div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">follow.it</h3><form action="" method="post" target="_blank"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="Subscribe"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hexo" height="28"></a><p class="is-size-7"><span>&copy; 2022 John Doe</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
