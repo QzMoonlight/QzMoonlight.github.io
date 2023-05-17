@@ -15,11 +15,13 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Chapter 2. Developing with Spring Boot本节将更详细地介绍如何使用 Spring Boot。涵盖的主题包括构建系统、自动配置以及如何运行应用程序。 如果您刚开始使用Spring Boot，建议您先阅读 “Getting Start” 再深入了解本节内容。 2.1 构建系统我们建议您选择 Maven 或 Gradle 构建系统。 2.1.1 依赖管理每个 Spri">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/moonlightqz/PicGo/raw/master/img/202305090943002.png">
 <meta property="article:published_time" content="2023-05-08T09:34:11.000Z">
-<meta property="article:modified_time" content="2023-05-08T09:50:39.551Z">
+<meta property="article:modified_time" content="2023-05-09T01:51:25.045Z">
 <meta property="article:author" content="MoonlightQz">
 <meta property="article:tag" content="Spring Boot">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/moonlightqz/PicGo/raw/master/img/202305090943002.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -184,6 +186,78 @@
 <p><em>每个 Spring Boot 版本都与一个 Spring Framework 基础版本相关联。我们强烈建议您不指定其版本。</em></p>
 <h4 id="2-1-2-Maven"><a href="#2-1-2-Maven" class="headerlink" title="2.1.2 Maven"></a>2.1.2 Maven</h4><p>参考文档：<a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/2.7.11/maven-plugin/reference/htmlsingle/">Spring Boot Maven Plugin Documentation</a></p>
 <h4 id="2-1-3-Gradle"><a href="#2-1-3-Gradle" class="headerlink" title="2.1.3 Gradle"></a>2.1.3 Gradle</h4><p>参考文档：<a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/2.7.11/gradle-plugin/reference/htmlsingle/">Spring Boot Gradle Plugin Reference Guide</a></p>
+<h4 id="2-1-4-Starters"><a href="#2-1-4-Starters" class="headerlink" title="2.1.4 Starters"></a>2.1.4 Starters</h4><p>Starters 是一组便捷的依赖描述符，您可以将其包含在您的应用程序中。这样，您就可以一站式获得所需的所有 Spring 和相关技术，而不必在代码中搜索并复制粘贴大量的依赖描述符。例如，如果您想要使用 Spring 和 JPA 进行数据库访问，可以在您的项目中包含 spring-boot-starter-data-jpa 依赖项。Starters 包含了许多依赖项，可以快速地启动项目，并具有一组一致的、受支持的托管传递依赖项。</p>
+<h5 id="Starter-的命名规则"><a href="#Starter-的命名规则" class="headerlink" title="Starter 的命名规则"></a>Starter 的命名规则</h5><p>所有官方的 Starter 都遵循相似的命名规则；即 spring-boot-starter-*，其中 * 是一种特定的应用程序类型。这种命名结构旨在帮助你找到 Starter。许多 IDE 中的 Maven 集成都可以通过名称搜索依赖项。例如，如果安装了适当的 Eclipse 或 Spring 工具插件，则可以在 POM 编辑器中按 Ctrl + Space 并输入 “spring-boot-starter” 以获取完整列表。</p>
+<p>如“创建您自己的 Starter”部分所述，第三方 Starter 不应以 spring-boot 开头，因为该名称保留给官方的 Spring Boot 工件。相反，第三方 Starter 通常以项目名称开头。例如，名为 thirdpartyproject 的第三方 Starter 项目通常被命名为 thirdpartyproject-spring-boot-starter。</p>
+<p>org.springframework.boot 组下的 starters 详见： <a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/org.springframework.boot">Maven Repository: org.springframework.boot</a></p>
+<h3 id="2-2-代码结构化"><a href="#2-2-代码结构化" class="headerlink" title="2.2. 代码结构化"></a>2.2. 代码结构化</h3><p>Spring Boot 不需要任何特定的代码布局来工作。<del>但有一些最佳实践可以帮助。</del></p>
+<h4 id="2-2-1-不使用-“默认包”"><a href="#2-2-1-不使用-“默认包”" class="headerlink" title="2.2.1 不使用 “默认包”"></a>2.2.1 不使用 “默认包”</h4><p>当一个类没有包声明时，它被认为是在“默认包”中。使用“默认包”通常不被推荐，应该避免使用。这可能会导致Spring Boot 应用程序使用 @ComponentScan、@ConfigurationPropertiesScan、@EntityScan或@SpringBootApplication 注释时出现问题，因为每个 jar 文件中的每个类都会被读取。</p>
+<p><em>我们建议你遵循 Java 推荐的包命名规范（例如，com.example.project）</em></p>
+<h4 id="2-2-2-定位-Main-应用类"><a href="#2-2-2-定位-Main-应用类" class="headerlink" title="2.2.2 定位 Main 应用类"></a>2.2.2 定位 Main 应用类</h4><p>我们通常建议将主应用程序类放在其他类之上的根包中。@SpringBootApplication 注释通常放在主类上，<br>它隐式地为某些项目定义了一个基本的“搜索包”。例如，如果您正在编写一个JPA应用程序，<br>@SpringBootApplication 注释的类的包将用于搜索@Entity项。使用根包还允许组件扫描仅适用于您的项目。</p>
+<p><em>可以使用 @EnableAutoConfiguration 和 @ComponentScan 注解来替代 @SpringBootApplication 注解。</em></p>
+<h3 id="2-3-配置类"><a href="#2-3-配置类" class="headerlink" title="2.3 配置类"></a>2.3 配置类</h3><p>Spring Boot 更青睐于基于 Java 的配置。虽然使用 XML 配置也是可行的，但我们通常建议你的主要配置源是一个单独的 @Configuration 类。通常情况下，定义 main 方法的类是作为主要 @Configuration 的一个好选择。</p>
+<h4 id="2-3-1-导入其他配置类"><a href="#2-3-1-导入其他配置类" class="headerlink" title="2.3.1 导入其他配置类"></a>2.3.1 导入其他配置类</h4><p>您不需要将所有的 @Configuration 放在一个类中。可以使用 @Import 注解导入其他的配置类。另外，您也可以使用 @ComponentScan 来自动扫描所有的 Spring 组件，包括 @Configuration 类。</p>
+<h4 id="2-3-2-导入-XML-配置"><a href="#2-3-2-导入-XML-配置" class="headerlink" title="2.3.2 导入 XML 配置"></a>2.3.2 导入 XML 配置</h4><p>如果您一定要使用基于 XML 的配置，我们建议您仍然从一个 @Configuration 类开始。然后，您可以使用@ImportResource 注解来加载XML配置文件。</p>
+<h3 id="2-4-自动配置"><a href="#2-4-自动配置" class="headerlink" title="2.4 自动配置"></a>2.4 自动配置</h3><p>Spring Boot 的自动配置会尝试根据你添加的 jar 依赖自动配置你的 Spring 应用程序。例如，如果 HSQLDB 在你的类路径中，并且你没有手动配置任何数据库连接 bean，那么 Spring Boot 会自动配置一个内存数据库。</p>
+<p><del>你需要通过将 @EnableAutoConfiguration 或 @SpringBootApplication 注解添加到其中一个@Configuration类中来选择自动配置。</del></p>
+<p><em><del>建议您只添加一个@SpringBootApplication或@EnableAutoConfiguration注解。</del></em></p>
+<p>一般在 main 应用类上添加 @SpringBootApplication 注解来开启自动配置。</p>
+<h4 id="2-4-1-替换自动配置"><a href="#2-4-1-替换自动配置" class="headerlink" title="2.4.1 替换自动配置"></a>2.4.1 替换自动配置</h4><p>自动配置是无侵入性的。在任何时候，您都可以开始定义自己的配置来替换自动配置的特定部分。例如，如果您添加了自己的 DataSource bean，则默认的内嵌式数据库支持会撤消。<br>如果您需要查找当前正在应用哪些自动配置以及为什么，请在启动应用程序时使用 –debug 开关。这样做会为一组核心日志记录器启用调试日志，并将条件报告记录到控制台。</p>
+<h4 id="2-4-2-禁用特定的自动配置"><a href="#2-4-2-禁用特定的自动配置" class="headerlink" title="2.4.2 禁用特定的自动配置"></a>2.4.2 禁用特定的自动配置</h4><p>如果你不想要某些自动配置类，可以使用 @SpringBootApplication 的 exclude 属性来禁用它们，如下面的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;</span><br><span class="line"></span><br><span class="line">@SpringBootApplication(exclude = &#123; DataSourceAutoConfiguration.class &#125;)</span><br><span class="line">public class MyApplication &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果您更喜欢使用 @EnableAutoConfiguration 而不是 @SpringBootApplication，则也可以使用 exclude 属性。最后，您还可以使用 spring.autoconfigure.exclude 属性控制要排除的自动配置类列表。</p>
+<p><em>你可以在注解级别和使用属性级别（配置类）上定义需要排除的自动配置。</em></p>
+<blockquote>
+<p>自动配置类虽然是 public 的，但其公共 API 仅限于类名，可用于禁用自动配置。这些类的实际内容（如嵌套的配置类或bean方法）仅供内部使用，我们不建议直接使用这些内容。</p>
+</blockquote>
+<h3 id="2-5-Spring-Beans-与依赖注入"><a href="#2-5-Spring-Beans-与依赖注入" class="headerlink" title="2.5. Spring Beans 与依赖注入"></a>2.5. Spring Beans 与依赖注入</h3><p>你可以自由地使用标准的 Spring Framework 技术来定义你的 bean 和它们注入的依赖关系。我们通常建议使用构造函数注入来连接依赖关系，并使用 @ComponentScan 查找 bean。</p>
+<p>如果你按照上述建议组织你的代码（将应用程序类放在顶层包中），你可以添加不带任何参数的 @ComponentScan，或者使用隐式包含它的 @SpringBootApplication 注解。所有应用程序组件（@Component、@Service、@Repository、@Controller 等）都会自动注册为 Spring Beans。</p>
+<p>以下示例展示了一个@Service Bean，它使用构造函数注入来获取所需的RiskAssessor bean：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line">@Service</span><br><span class="line">public class MyAccountService implements AccountService &#123;</span><br><span class="line"></span><br><span class="line">	private final RiskAssessor riskAssessor;</span><br><span class="line">	</span><br><span class="line">	public MyAccountService(RiskAssessor riskAssessor) &#123;</span><br><span class="line">		this.riskAssessor = riskAssessor;</span><br><span class="line">  	&#125;</span><br><span class="line">  	</span><br><span class="line">  	// ...</span><br><span class="line">  	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果一个 bean 有多个构造函数，你需要使用 @Autowired 注解标注你希望 Spring 使用的构造函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import java.io.PrintStream;</span><br><span class="line"></span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line">@Service</span><br><span class="line">public class MyAccountService implements AccountService &#123;</span><br><span class="line"></span><br><span class="line">    private final RiskAssessor riskAssessor;</span><br><span class="line"></span><br><span class="line">    private final PrintStream out;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    public MyAccountService(RiskAssessor riskAssessor) &#123;</span><br><span class="line">        this.riskAssessor = riskAssessor;</span><br><span class="line">        this.out = System.out;</span><br><span class="line">    &#125;</span><br><span class="line">    public MyAccountService(RiskAssessor riskAssessor, PrintStream out) &#123;</span><br><span class="line">        this.riskAssessor = riskAssessor;</span><br><span class="line">        this.out = out;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">  	// ...</span><br><span class="line">  	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em>使用构造函数注入时，注意到 riskAssessor 字段被标记为 final ，表示它不能被后续更改。</em></p>
+<h3 id="2-6-使用-SpringBootApplication-注解"><a href="#2-6-使用-SpringBootApplication-注解" class="headerlink" title="2.6. 使用 @SpringBootApplication 注解"></a>2.6. 使用 @SpringBootApplication 注解</h3><p><del>摸了，详见 <a target="_blank" rel="noopener" href="https://springdoc.cn/spring-boot/using.html#using.using-the-springbootapplication-annotation">使用 @SpringBootApplication 注解</a></del></p>
+<h3 id="2-7-运行程序"><a href="#2-7-运行程序" class="headerlink" title="2.7. 运行程序"></a>2.7. 运行程序</h3><p><del>摸了，详见 <a target="_blank" rel="noopener" href="https://springdoc.cn/spring-boot/using.html#using.running-your-application">运行程序</a>。</del></p>
+<h3 id="2-8-开发者工具"><a href="#2-8-开发者工具" class="headerlink" title="2.8. 开发者工具"></a>2.8. 开发者工具</h3><p>Spring Boot 包含了一组额外的工具，可以使应用程序开发体验更加愉悦。spring-boot-devtools 模块可以被包含在任何项目中，以提供额外的开发时间功能。要包含 devtools 支持，请将模块依赖项添加到您的构建中，如下面的 Maven 和 Gradle 示例所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;</span><br><span class="line">        &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">  developmentOnly(&quot;org.springframework.boot:spring-boot-devtools&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>开发者工具在运行完全打包的应用程序时会自动禁用。您可以通过使用<code>spring.devtools.restart.enabled</code> 系统属性来控制此行为。为了启用 devtools，无论用于启动应用程序的类加载器如何，都应将 <code>spring.devtools.restart.enabled=true</code> 系统属性设置为<code>true</code>。这不应在生产环境中执行，因为运行 devtools 会存在安全风险。要禁用 devtools，请排除依赖项或设置<code>spring.devtools.restart.enabled=false</code> 系统属性。</p>
+</blockquote>
+<p><em>将 Maven中的依赖标记为可选（optional），或在 Gradle中使用 developmentOnly 配置，可以防止将 devtools 传递应用到使用您项目的其他模块中。（Maven 中的 optional 表示这个依赖并非必须的，即使这个依赖未能被解析，Maven 也会继续构建项目，而不会报错。当其他项目依赖该项目时，可选依赖不会被传递。）</em></p>
+<p><em>重新打包的归档文件默认不包含 devtools。如果想要使用特定的远程 devtools 功能，就需要将它包含进去。使用 Maven 插件时，将 excludeDevtools 属性设置为 false。使用 Gradle 插件时，配置任务的类路径，以包括 developmentOnly 配置。（“重新打包的归档文件”是指通过重新打包应用程序，将应用程序和所有依赖项打包到一个可执行的 JAR 或 WAR 文件中。）</em></p>
+<h5 id="重启和重载"><a href="#重启和重载" class="headerlink" title="重启和重载"></a>重启和重载</h5><p>Spring Boot 提供的重启技术通过使用两个类加载器来实现。不会发生更改的类（例如来自第三方 jar 包的类）会被加载到基础类加载器中。您正在积极开发的类会被加载到重启类加载器中。当应用程序重新启动时，重启类加载器被丢弃并创建一个新的。这种方法意味着应用程序重启通常比“冷启动”快得多，因为基础类加载器已经可用且已经填充。如果您发现应用程序重启对于您的应用程序不够快或遇到了类加载问题，您可以考虑使用重载技术。这些技术通过重写加载的类使它们更容易重新加载。</p>
+<h4 id="2-8-1-诊断类加载问题"><a href="#2-8-1-诊断类加载问题" class="headerlink" title="2.8.1. 诊断类加载问题"></a>2.8.1. 诊断类加载问题</h4><p>重启功能是通过使用两个类加载器实现的。对于大多数应用程序，这种方法很好用。然而，在多模块项目中，它有时会导致类加载问题。为了诊断这些类加载问题是否确实是由 devtools 和其两个类加载器引起的，请尝试禁用重启功能。如果这解决了你的问题，请自定义重启类加载器以包括整个项目。</p>
+<h4 id="2-8-2-属性默认值"><a href="#2-8-2-属性默认值" class="headerlink" title="2.8.2. 属性默认值"></a>2.8.2. 属性默认值</h4><p>Spring Boot 支持的多个库使用缓存来提高性能，例如模板引擎缓存编译后的模板文件以避免重复解析模板文件。此外，当提供静态资源时，Spring MVC 可以添加 HTTP 缓存标头以提高响应速度。虽然缓存在生产环境中非常有益，但在开发过程中可能会产生相反的效果，阻止您查看刚刚对应用程序所做的更改。因此，spring-boot-devtools 默认禁用缓存选项。</p>
+<p>缓存选项通常由应用程序属性文件中的设置进行配置。例如，Thymeleaf 提供了 spring.thymeleaf.cache 属性。spring-boot-devtools 模块会自动应用合理的开发时配置，而无需手动设置这些属性。</p>
+<p>要查看由 devtools 应用的完整属性列表，请参阅：<a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-boot/blob/v2.7.11/spring-boot-project/spring-boot-devtools/src/main/java/org/springframework/boot/devtools/env/DevToolsPropertyDefaultsPostProcessor.java">DevToolsPropertyDefaultsPostProcessor</a></p>
+<p><em>如果您不希望应用属性默认值，可以在您的 application.properties 文件中设置 spring.devtools.add-properties 为 false。</em></p>
+<h4 id="2-8-3-自动重启"><a href="#2-8-3-自动重启" class="headerlink" title="2.8.3 自动重启"></a>2.8.3 自动重启</h4><p>使用 spring-boot-devtools 的应用程序在类路径上的文件更改时会自动重启。当在 IDE 中工作时，这是一个非常有用的特性，因为它可以为代码更改提供非常快的反馈循环。默认情况下，类路径上指向目录的任何条目都会被监视以进行更改。请注意，某些资源，例如静态资源和视图模板，更改时不需要重新启动应用程序。</p>
+<p>详细内容请参阅：<a target="_blank" rel="noopener" href="https://springdoc.cn/spring-boot/using.html#using.devtools.restart">自动重启</a></p>
+<h4 id="2-8-4-热部署"><a href="#2-8-4-热部署" class="headerlink" title="2.8.4 热部署"></a>2.8.4 热部署</h4><p>spring-boot-devtools 模块包含一个内置的热部署服务器，可用于在更改资源时触发浏览器刷新。</p>
+<p>以下是 IDEA 配置热部署的操作。</p>
+<img src="https://gitee.com/moonlightqz/PicGo/raw/master/img/202305090943002.png" alt="image-20230509094223831" style="zoom: 33%;" />
+
+<blockquote>
+<p>为了能够文件更改时触发热部署，自动重启必须启用。</p>
+</blockquote>
+<blockquote>
+<p>同时只能运行一个热部署服务器。在启动应用程序之前，请确保没有其他热部署服务器在运行。如果从您的IDE启动多个应用程序，则只有第一个应用程序具有热部署支持。</p>
+</blockquote>
+<h4 id="2-8-5-全局设置"><a href="#2-8-5-全局设置" class="headerlink" title="2.8.5 全局设置"></a>2.8.5 全局设置</h4><p>您可以通过在 $HOME&#x2F;.config&#x2F;spring-boot 目录下添加以下任何文件来配置全局 devtools 设置：</p>
+<ol>
+<li>spring-boot-devtools.properties</li>
+<li>spring-boot-devtools.yaml</li>
+<li>spring-boot-devtools.yml</li>
+</ol>
+<p>添加到这些文件中的任何属性都适用于在您的计算机上使用 devtools 的所有 Spring Boot 应用程序。</p>
+<h4 id="2-8-6-远程应用"><a href="#2-8-6-远程应用" class="headerlink" title="2.8.6 远程应用"></a>2.8.6 远程应用</h4><p><del>摸了，详见 <a target="_blank" rel="noopener" href="https://springdoc.cn/spring-boot/using.html#using.devtools.remote-applications">远程应用</a></del></p>
 
       
 
@@ -287,6 +361,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2023/05/09/Core-Features/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Core Features
+        
+      </div>
+    </a>
   
   
     <a href="/2023/05/08/Getting-Started/" id="article-nav-older" class="article-nav-link-wrap">
@@ -417,6 +500,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring Boot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Mall</a>
               </li>
             
             <div class="clearfix"></div>
