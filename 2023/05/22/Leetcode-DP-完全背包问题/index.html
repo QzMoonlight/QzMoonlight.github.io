@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: Mall | Hexo</title>
+  <title>Leetcode DP 完全背包问题 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/tags/Mall/index.html">
+  <meta name="description" content="完全背包基础有 n 件物品和一个最多能背重量为 w 的背包。第i件物品的重量是 weight[i]，得到的价值是 value[i]。每件物品可以拿多次，求解将哪些物品装入背包里物品价值总和最大。 背包最大重量为4。     重量 价值    物品0 1 15   物品1 3 20   物品2 4 30   0-1 背包问题的循环是从大到小遍历，为了保证每个物品仅被添加一次。 而完全背包的物品是可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leetcode DP 完全背包问题">
+<meta property="og:url" content="http://example.com/2023/05/22/Leetcode-DP-%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="完全背包基础有 n 件物品和一个最多能背重量为 w 的背包。第i件物品的重量是 weight[i]，得到的价值是 value[i]。每件物品可以拿多次，求解将哪些物品装入背包里物品价值总和最大。 背包最大重量为4。     重量 价值    物品0 1 15   物品1 3 20   物品2 4 30   0-1 背包问题的循环是从大到小遍历，为了保证每个物品仅被添加一次。 而完全背包的物品是可以">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/moonlightqz/PicGo/raw/master/img/202305191354471.jpg">
+<meta property="og:image" content="https://gitee.com/moonlightqz/PicGo/raw/master/img/202305221123185.png">
+<meta property="article:published_time" content="2023-05-22T03:22:35.000Z">
+<meta property="article:modified_time" content="2023-05-22T03:24:07.951Z">
 <meta property="article:author" content="MoonlightQz">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/moonlightqz/PicGo/raw/master/img/202305191354471.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,60 +157,381 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Leetcode-DP-完全背包问题" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/05/13/Mall-%E5%95%86%E5%93%81%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2023-05-13T02:23:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-13</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/05/13/Mall-%E5%95%86%E5%93%81%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90/">Mall 商品模块分析</a>
+    <h1 class="article-title" itemprop="name">
+      Leetcode DP 完全背包问题
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Mall</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        <a href="/2023/05/22/Leetcode-DP-%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2023-05-22T03:22:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="完全背包基础"><a href="#完全背包基础" class="headerlink" title="完全背包基础"></a>完全背包基础</h2><p>有 <code>n</code> 件物品和一个最多能背重量为 <code>w</code> 的背包。第i件物品的重量是 <code>weight[i]</code>，得到的价值是 <code>value[i]</code>。<strong>每件物品可以拿多次</strong>，求解将哪些物品装入背包里物品价值总和最大。</p>
+<p>背包最大重量为4。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>重量</th>
+<th>价值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>物品0</td>
+<td>1</td>
+<td>15</td>
+</tr>
+<tr>
+<td>物品1</td>
+<td>3</td>
+<td>20</td>
+</tr>
+<tr>
+<td>物品2</td>
+<td>4</td>
+<td>30</td>
+</tr>
+</tbody></table>
+<p>0-1 背包问题的循环是从大到小遍历，为了保证每个物品仅被添加一次。</p>
+<p>而完全背包的物品是可以添加多次的，所以要从小到大去遍历，即：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先遍历物品，再遍历背包</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; weight.<span class="built_in">size</span>(); i++) &#123; <span class="comment">// 遍历物品</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = weight[i]; j &lt;= bagWeight ; j++) &#123; <span class="comment">// 遍历背包容量</span></span><br><span class="line">        dp[j] = <span class="built_in">max</span>(dp[j], dp[j - weight[i]] + value[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-          
+<p><strong>对于完全背包问题（求最大价值）的滚动数组，两个循环的嵌套顺序是无所谓的！</strong></p>
+<p>物品在外环，背包在内环的遍历：</p>
+<img src="https://gitee.com/moonlightqz/PicGo/raw/master/img/202305191354471.jpg" alt="动态规划-完全背包1" style="zoom:50%;" />
 
+<p>背包在外环，物品在内环的遍历：</p>
+<img src="https://gitee.com/moonlightqz/PicGo/raw/master/img/202305221123185.png" alt="动态规划-完全背包2" style="zoom:50%;" />
+
+
+
+<p><strong>（518）但在求装满背包有几种方案的时候，需要区分遍历顺序：</strong></p>
+<ul>
+<li><p>求组合数就是外层遍历物品，内层遍历背包。</p>
+</li>
+<li><p>求排列数就是外层遍历背包，内层遍历物品。</p>
+</li>
+</ul>
+<h3 id="518-零钱兑换-II-Middle"><a href="#518-零钱兑换-II-Middle" class="headerlink" title="518. 零钱兑换 II Middle"></a>518. 零钱兑换 II Middle</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change-ii/">518. 零钱兑换 II - 力扣（Leetcode）</a></p>
+<p>给你一个整数数组 <code>coins</code> 表示不同面额的硬币，另给一个整数 <code>amount</code> 表示总金额。</p>
+<p>请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回 <code>0</code> 。</p>
+<p>假设每一种面额的硬币有无限个。 </p>
+<p>题目数据保证结果符合 32 位带符号整数。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：amount = 5, coins = [1, 2, 5]</span><br><span class="line">输出：4</span><br><span class="line">解释：有四种方式可以凑成总金额：</span><br><span class="line">5=5</span><br><span class="line">5=2+2+1</span><br><span class="line">5=2+1+1+1</span><br><span class="line">5=1+1+1+1+1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：amount = 3, coins = [2]</span><br><span class="line">输出：0</span><br><span class="line">解释：只用面额 2 的硬币不能凑成总金额 3 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：amount = 10, coins = [10] </span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= coins.length &lt;= 300</code></li>
+<li><code>1 &lt;= coins[i] &lt;= 5000</code></li>
+<li><code>coins</code> 中的所有值 <strong>互不相同</strong></li>
+<li><code>0 &lt;= amount &lt;= 5000</code></li>
+</ul>
+<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><p>装满背包，求组合数。</p>
+<ol>
+<li>确定 <code>dp</code> 数组以及下标的含义：凑成总金额为 <code>j</code> 的硬币组合数中为 <code>dp[j]</code></li>
+<li>确定递推公式：<code>dp[j] += d[j-coins[i]]</code></li>
+<li><code>dp</code> 数组初始化：<code>dp[0] = 1</code></li>
+<li>确定遍历顺序：从小到大遍历</li>
+<li>举例推导 <code>dp</code> 数组：</li>
+</ol>
+<p><strong>事实上，本题限定必须先遍历物品再遍历背包 &#x3D;&gt; 组合数。先背包再物品 &#x3D;&gt; 排列数。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">change</span><span class="params">(<span class="type">int</span> amount, <span class="type">int</span>[] coins)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> coins.length;</span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[amount + <span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> coins[i]; j &lt;= amount; j++) &#123;</span><br><span class="line">                dp[j] += dp[j - coins[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[amount];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="377-组合总和-IV-Middle"><a href="#377-组合总和-IV-Middle" class="headerlink" title="377. 组合总和 IV Middle"></a>377. 组合总和 IV Middle</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iv/">377. 组合总和 Ⅳ - 力扣（Leetcode）</a></p>
+<p>给你一个由 <strong>不同</strong> 整数组成的数组 <code>nums</code> ，和一个目标整数 <code>target</code> 。请你从 <code>nums</code> 中找出并返回总和为 <code>target</code> 的元素组合的个数。</p>
+<p>题目数据保证答案符合 32 位整数范围。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,3], target = 4</span><br><span class="line">输出：7</span><br><span class="line">解释：</span><br><span class="line">所有可能的组合为：</span><br><span class="line">(1, 1, 1, 1)</span><br><span class="line">(1, 1, 2)</span><br><span class="line">(1, 2, 1)</span><br><span class="line">(1, 3)</span><br><span class="line">(2, 1, 1)</span><br><span class="line">(2, 2)</span><br><span class="line">(3, 1)</span><br><span class="line">请注意，顺序不同的序列被视作不同的组合。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [9], target = 3</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 200</code></li>
+<li><code>1 &lt;= nums[i] &lt;= 1000</code></li>
+<li><code>nums</code> 中的所有元素 <strong>互不相同</strong></li>
+<li><code>1 &lt;= target &lt;= 1000</code></li>
+</ul>
+<p><strong>进阶：</strong>如果给定的数组中含有负数会发生什么？问题会产生何种变化？如果允许负数出现，需要向题目中添加哪些限制条件？</p>
+<h4 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h4><p>装满背包问题，求排列数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">combinationSum4</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[target + <span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= target; j++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; ++i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j - nums[i] &gt;= <span class="number">0</span>)</span><br><span class="line">                    dp[j] += dp[j - nums[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[target];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;s</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="70-爬楼梯-Easy"><a href="#70-爬楼梯-Easy" class="headerlink" title="70. 爬楼梯 Easy"></a>70. 爬楼梯 Easy</h3><p>假设你正在爬楼梯。需要 <code>n</code> 阶你才能到达楼顶。</p>
+<p>每次你可以爬 <code>1</code> 或 <code>2</code> 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 2</span><br><span class="line">输出：2</span><br><span class="line">解释：有两种方法可以爬到楼顶。</span><br><span class="line">1. 1 阶 + 1 阶</span><br><span class="line">2. 2 阶</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 3</span><br><span class="line">输出：3</span><br><span class="line">解释：有三种方法可以爬到楼顶。</span><br><span class="line">1. 1 阶 + 1 阶 + 1 阶</span><br><span class="line">2. 1 阶 + 2 阶</span><br><span class="line">3. 2 阶 + 1 阶</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 45</code></li>
+</ul>
+<h4 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h4><p><strong>用背包方法，就可以将步数从 {1，2} 推广到 {1，2，…，m}</strong></p>
+<p>装满背包问题，求排列数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">climbStairs</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        <span class="type">int</span>[] weight = &#123; <span class="number">1</span>, <span class="number">2</span> &#125;;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; weight.length; ++i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j - weight[i] &gt;= <span class="number">0</span>)</span><br><span class="line">                    dp[j] += dp[j - weight[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="322-零钱兑换-Middle"><a href="#322-零钱兑换-Middle" class="headerlink" title="322. 零钱兑换 Middle"></a>322. 零钱兑换 Middle</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change/">322. 零钱兑换 - 力扣（Leetcode）</a></p>
+<p>给你一个整数数组 <code>coins</code> ，表示不同面额的硬币；以及一个整数 <code>amount</code> ，表示总金额。</p>
+<p>计算并返回可以凑成总金额所需的 <strong>最少的硬币个数</strong> 。如果没有任何一种硬币组合能组成总金额，返回 <code>-1</code> 。</p>
+<p>你可以认为每种硬币的数量是无限的。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：coins = [1, 2, 5], amount = 11</span><br><span class="line">输出：3 </span><br><span class="line">解释：11 = 5 + 5 + 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins = [2], amount = 3</span><br><span class="line">输出：-1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins = [1], amount = 0</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= coins.length &lt;= 12</code></li>
+<li><code>1 &lt;= coins[i] &lt;= 2^31 - 1</code></li>
+<li><code>0 &lt;= amount &lt;= 10^4</code></li>
+</ul>
+<h4 id="题解-3"><a href="#题解-3" class="headerlink" title="题解"></a>题解</h4><p><del>第一个思路：首先要求背包价值，其次要求物品数量最少 &#x3D;&gt; 双重背包分别保存价值和硬币数量</del> 方法复杂还做不对（x)</p>
+<p>第二个思路：只保存硬币个数</p>
+<ol>
+<li><p>确定 <code>dp</code> 数组以及下标的含义：<code>dp[j]</code> 为凑成总金额 <code>j</code> 所需的最少的硬币个数</p>
+</li>
+<li><p>确定递推公式：<code>dp[j] = min(dp[j], dp[j-coins[i]] + 1</code></p>
+</li>
+<li><p><code>dp</code> 数组初始化： <code>dp[0] = 0</code>，由于递推公式需要求最小值，那么 <code>dp[j]</code>必须取最大值</p>
+<p>&#x3D;&gt; 事实上最多只会有 <code>amount</code> 个硬币，因此设 <code>dp[j] = amount + 1 (j ≠ 0)</code></p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">coinChange</span><span class="params">(<span class="type">int</span>[] coins, <span class="type">int</span> amount)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> coins.length;</span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[amount + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= amount; i++) &#123;</span><br><span class="line">            dp[i] = amount + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> coins[i]; j &lt;= amount; j++) &#123;</span><br><span class="line">                dp[j] = Math.min(dp[j], dp[j - coins[i]] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[amount] &gt; amount ? -<span class="number">1</span> : dp[amount];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="279-完全平方数-Middle"><a href="#279-完全平方数-Middle" class="headerlink" title="279. 完全平方数 Middle"></a>279. 完全平方数 Middle</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/perfect-squares/">279. 完全平方数 - 力扣（Leetcode）</a></p>
+<p>给你一个整数 <code>n</code> ，返回 <em>和为 <code>n</code> 的完全平方数的最少数量</em> 。</p>
+<p><strong>完全平方数</strong> 是一个整数，其值等于另一个整数的平方；换句话说，其值等于一个整数自乘的积。例如，<code>1</code>、<code>4</code>、<code>9</code> 和 <code>16</code> 都是完全平方数，而 <code>3</code> 和 <code>11</code> 不是。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 12</span><br><span class="line">输出：3 </span><br><span class="line">解释：12 = 4 + 4 + 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 13</span><br><span class="line">输出：2</span><br><span class="line">解释：13 = 4 + 9</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 10^4</code></li>
+</ul>
+<h4 id="题解-4"><a href="#题解-4" class="headerlink" title="题解"></a>题解</h4><p>本质和 322. 零钱兑换相同，区别在于完全平方数 <code>weights</code> 需要自己计算。</p>
+<ol>
+<li><p>确定 <code>dp</code> 数组以及下标的含义：<code>dp[j]</code> 为和为 <code>j</code> 的完全平方数的最少数量</p>
+</li>
+<li><p>确定递推公式：<code>dp[j] = min(dp[j], dp[j-weights[i]] + 1</code></p>
+</li>
+<li><p><code>dp</code> 数组初始化： <code>dp[0] = 0</code>，由于递推公式需要求最小值，那么 <code>dp[j]</code>必须取最大值</p>
+<p>&#x3D;&gt; 事实上最多只会有 <code>n</code> 个硬币，因此设 <code>dp[j] = n + 1 (j ≠ 0)</code></p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">numSquares</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line"></span><br><span class="line">        ArrayList&lt;Integer&gt; arr = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (tmp &lt;= n) &#123;</span><br><span class="line">            <span class="keyword">if</span> (isSquare(tmp))</span><br><span class="line">                arr.add(tmp);</span><br><span class="line">            tmp++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> arr.size();</span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            dp[i] = n + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> arr.get(i); j &lt;= n; j++) &#123;</span><br><span class="line">                dp[j] = Math.min(dp[j], dp[j - arr.get(i)] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[n] &gt; n ? -<span class="number">1</span> : dp[n];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="title function_">isSquare</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; n &gt; <span class="number">0</span>; i += <span class="number">2</span>)</span><br><span class="line">            n -= i;</span><br><span class="line">        <span class="keyword">return</span> n == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>答案的思路，不需要判断是否为平方数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">numSquares</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> Integer.MAX_VALUE;</span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        <span class="comment">//初始化</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            dp[j] = max;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 遍历物品</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i * i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="comment">// 遍历背包</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i * i; j &lt;= n; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (dp[j - i * i] != max) &#123;</span><br><span class="line">                    dp[j] = Math.min(dp[j], dp[j - i * i] + <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="139-单词拆分-Middle"><a href="#139-单词拆分-Middle" class="headerlink" title="139. 单词拆分 Middle"></a>139. 单词拆分 Middle</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/word-break/">139. 单词拆分 - 力扣（Leetcode）</a></p>
+<p>给你一个字符串 <code>s</code> 和一个字符串列表 <code>wordDict</code> 作为字典。请你判断是否可以利用字典中出现的单词拼接出 <code>s</code> 。</p>
+<p><strong>注意：</strong>不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;leetcode&quot;</span>, wordDict = [<span class="string">&quot;leet&quot;</span>, <span class="string">&quot;code&quot;</span>]</span><br><span class="line">输出: <span class="literal">true</span></span><br><span class="line">解释: 返回 <span class="literal">true</span> 因为 <span class="string">&quot;leetcode&quot;</span> 可以由 <span class="string">&quot;leet&quot;</span> 和 <span class="string">&quot;code&quot;</span> 拼接成。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;applepenapple&quot;</span>, wordDict = [<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;pen&quot;</span>]</span><br><span class="line">输出: <span class="literal">true</span></span><br><span class="line">解释: 返回 <span class="literal">true</span> 因为 <span class="string">&quot;applepenapple&quot;</span> 可以由 <span class="string">&quot;apple&quot;</span> <span class="string">&quot;pen&quot;</span> <span class="string">&quot;apple&quot;</span> 拼接成。</span><br><span class="line">     注意，你可以重复使用字典中的单词。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;catsandog&quot;</span>, wordDict = [<span class="string">&quot;cats&quot;</span>, <span class="string">&quot;dog&quot;</span>, <span class="string">&quot;sand&quot;</span>, <span class="string">&quot;and&quot;</span>, <span class="string">&quot;cat&quot;</span>]</span><br><span class="line">输出: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= s.length &lt;= 300</code></li>
+<li><code>1 &lt;= wordDict.length &lt;= 1000</code></li>
+<li><code>1 &lt;= wordDict[i].length &lt;= 20</code></li>
+<li><code>s</code> 和 <code>wordDict[i]</code> 仅有小写英文字母组成</li>
+<li><code>wordDict</code> 中的所有字符串 <strong>互不相同</strong></li>
+</ul>
+<h4 id="题解-5"><a href="#题解-5" class="headerlink" title="题解"></a>题解</h4><p>字符串怎么比对？</p>
+<p>答案：</p>
+<ol>
+<li>确定 <code>dp</code> 数组以及下标的含义：<code>dp[j] = true</code> 即字符串长度为 <code>j</code> 时可以被拆分为多个单词</li>
+<li>确定递推公式：<code>if(s.substring(i, j) 在字典里 &amp;&amp; dp[i] == ture) =&gt; dp[j] = true</code></li>
+<li><code>dp</code> 数组初始化： <code>dp[0] = true</code></li>
+<li>确定遍历顺序：<strong>注意单词必须有序，因此需要求排列数</strong> &#x3D;&gt; 先背包后物品</li>
+</ol>
+<p>本题的关键在于分析谁是“物品”，有别于传统题目提供数组作为物品，本题将字串作为物品进行分析。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">wordBreak</span><span class="params">(String s, List&lt;String&gt; wordDict)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> s.length();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// HashSet 实现查找功能</span></span><br><span class="line">        HashSet&lt;String&gt; set = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;(wordDict);</span><br><span class="line">        <span class="type">boolean</span>[] dp = <span class="keyword">new</span> <span class="title class_">boolean</span>[len + <span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;= len; j++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; j &amp;&amp; !dp[j]; i++)</span><br><span class="line">                <span class="keyword">if</span> (set.contains(s.substring(i, j)) &amp;&amp; dp[i])</span><br><span class="line">                    dp[j] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[len];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/05/22/Leetcode-DP-%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2023/05/22/Leetcode-DP-0-1-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Leetcode DP 0-1 背包问题
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2023/05/22/Leetcode-DP-%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Leetcode DP 打家劫舍问题</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -226,9 +554,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
